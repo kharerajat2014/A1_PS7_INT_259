@@ -71,26 +71,26 @@ class Graph:
             self.__n = self.__n - 1            
 
 
-# creating objects of class Graph 
-obj = Graph(4); 
+# # creating objects of class Graph 
+# obj = Graph(4); 
     
-# calling methods 
-obj.addEdge(0, 1); 
-obj.addEdge(0, 2); 
-obj.addEdge(1, 2); 
-obj.addEdge(2, 3); 
-# the adjacency matrix created 
-obj.displayAdjacencyMatrix(); 
+# # calling methods 
+# obj.addEdge(0, 1); 
+# obj.addEdge(0, 2); 
+# obj.addEdge(1, 2); 
+# obj.addEdge(2, 3); 
+# # the adjacency matrix created 
+# obj.displayAdjacencyMatrix(); 
 
-# adding a vertex to the graph 
-obj.addVertex(); 
-# connecting that verex to other existing vertices 
-obj.addEdge(4, 1); 
-obj.addEdge(4, 3); 
-# the adjacency matrix with a new vertex 
-obj.displayAdjacencyMatrix(); 
+# # adding a vertex to the graph 
+# obj.addVertex(); 
+# # connecting that verex to other existing vertices 
+# obj.addEdge(4, 1); 
+# obj.addEdge(4, 3); 
+# # the adjacency matrix with a new vertex 
+# obj.displayAdjacencyMatrix(); 
     
-# removing an existing vertex in the graph 
-obj.removeVertex(1); 
-# the adjacency matrix after removing a vertex 
-obj.displayAdjacencyMatrix(); 
+# # removing an existing vertex in the graph 
+# obj.removeVertex(1); 
+# # the adjacency matrix after removing a vertex 
+# obj.displayAdjacencyMatrix(); 

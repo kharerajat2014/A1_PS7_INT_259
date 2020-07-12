@@ -4,3 +4,6 @@
   - inputs are in input folder
   - outputPS7.txt is in output folder
   - analysis is in analysis folder
+
+
+We couldnt get  to solve def findDirectTranslator(self, langA, langB): and def findTransRelation(self, langA, langB) with the time available. Thanks.

@@ -1,12 +1,38 @@
 # Python program to add and remove Vertex in Adjacency Matrix 
+class Vertice():
+    __name = 0
+    __type = 0
+    __count = 0
+
+    def __init__(self, name, type):
+        self.__name = name
+        self.__type = type
+    
+    def __hash__(self):
+        return self.__hash__()
+
+    def __eq__(self, other):
+        return self.__name == other.__name and self.__type == other.__type
+
+    def getName(self):
+        return self.__name
+    
+    def getType(self):
+        return self.__type
+    
+    def getCount(self):
+        return self.__count
 
 class Graph: 
-    # number of vertices 
     __n = 0
+    __vertices = []
 
     # adjacency matrix 
-    __g =[[0 for x in range(10)] for y in range(10)] 
+    __g =[[0 for x in range(50)] for y in range(50)] 
         
+    def getGraph(self):
+        return self.__g
+    
     # constructor 
     def __init__(self, x): 
         self.__n = x 
@@ -39,15 +65,49 @@ class Graph:
             self.__g[y][x]= 1
             self.__g[x][y]= 1    
 
-    def addVertex(self): 
-            
+    def addVertex(self, vertice): 
+        #print("Value of n -")
+        #print(self.__n)
         # increasing the number of vertices 
-        self.__n = self.__n + 1; 
-            
+        self.__n = self.__n + 1 
+        
+        self.__vertices.append(vertice)
         # initializing the new elements to 0 
-        for i in range(0, self.__n): 
+        for i in range(0, self.__n):
+            #print(self.__n) 
             self.__g[i][self.__n-1]= 0
-            self.__g[self.__n-1][i]= 0                
+            self.__g[self.__n-1][i]= 0  
+
+    def getVerticesSize(self):
+        return len(self.__vertices)
+
+    def getVertices(self):
+        return self.__vertices
+
+    def showAll(self):
+        #uniqint = [v for v in self.__vertices if v.getType() == "intepreter"]
+        #print(uniqint)
+        uniqI = []
+        uniqL = []
+
+
+        for v1 in self.__vertices:
+            if(v1.getType() == "interpreter"):
+                uniqI.append(v1.getName())
+            elif(v1.getType() == "language"):
+                uniqL.append(v1.getName())
+
+        print("Total no. of candidates: "+str(len(uniqI)))
+        print("Total no. of languages: "+str(len(uniqL)))
+
+        print("List of candidates:")
+        print(uniqI)
+
+        print("List of languages:")
+        print(uniqL)
+
+
+
     def removeVertex(self, x): 
         
         # checking if the vertex is present 
@@ -79,6 +139,7 @@ class Graph:
 # obj.addEdge(0, 2); 
 # obj.addEdge(1, 2); 
 # obj.addEdge(2, 3); 
+#obj.addEdge(5, 3); 
 # # the adjacency matrix created 
 # obj.displayAdjacencyMatrix(); 
 

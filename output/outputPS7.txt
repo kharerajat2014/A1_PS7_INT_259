@@ -7,19 +7,13 @@ List of languages:
 ['English', 'Hindi', 'Punjabi', 'Kannada', 'Tamil', 'Telugu', 'Malayalam', 'Marathi', 'Gujarati', 'Bengali']
 None
 --------Function displayHireList--------
-No of candidates required to cover all languages:  12
+No of candidates required to cover all languages:  5
 Manasa/ English/ Hindi/ Punjabi
 Venkat/ English/ Kannada/ Tamil/ Telugu
 Harish/ English/ Hindi/ Punjabi/ Gujarati
 Nisha/ English/ Hindi/ Marathi/ Bengali
 Amjad/ English/ Hindi/ Gujarati
-Sanjay/ English/ Bengali
-Zubin/ English/ Hindi
-Parul/ Hindi/ Punjabi
-Paul/ Tamil/ Telugu/ Malayalam/ Marathi
-Rohan/ Tamil/ Telugu/ Malayalam
-Surya/ Tamil/ Malayalam
-Rahul/ Marathi
+
 --------Function displayCandidates--------
 List of candidates who can speak  Hindi:
 Manasa

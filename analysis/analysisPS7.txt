@@ -1,0 +1,20 @@
+def readApplications(self, inputfile): 
+As it run through each line in the input file and each element of each Line 
+Time complexity is O(N*(M+1)) where N being the the No of interpreters and M is the no of languages.
+
+Time Complexity of def readApplications(self, inputfile) is O(N*M)
+
+
+def showAll(self): 
+Since we have have implemented using Bipartite Graph and the interpreters and Language will be treated as vertices. To display No Interpreters and Language, we just run through the list of vertrices. Henase the time complexity is O(M+N)
+
+
+def displayHireList(self): 
+
+Here we runtrough each element element of the adjacency matric anf check if the edge u-v is a valid edge to bencluded in in Minimum Spanning Tree.An edge is valid if one end is already included in MST and other is not. Since we are trvesing each element in the matric time complexity will be O (N+M) * O(N+M)
+
+
+def displayCandidates(self, lang): 
+
+We traveser through list of vertices to identify the Vertex and then compare it with the each interprter speaking language. So the time complexity is O(N+M)*N)
+

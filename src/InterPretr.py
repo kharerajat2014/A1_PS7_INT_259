@@ -124,6 +124,7 @@ class InterPretr:
                 for i in range(len(self.adjMatrix.getGraph())):
                     if((self.adjMatrix.getGraph())[i][lang_index] == 1):
                         print((self.adjMatrix.getVertices())[i].getName())
+                break
 
 
     def findDirectTranslator(self, langA, langB):

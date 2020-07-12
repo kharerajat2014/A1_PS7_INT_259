@@ -16,21 +16,47 @@ class InterPretr:
     
     # constructor 
     def __init__(self):
-        self.__promptsFile = open("../input/promptsPS7.txt", 'r') 
-        self.__promptsText = self.__promptsFile.read()
+       
+        
         
         # Initialize outputPS7.txt to get the output of all results
         #original_stdout = sys.stdout  # Save a reference to the original standard output
-        #self.__outputFile =  open('../output/outputPS7.txt', 'w')
+        self.__outputFile =  open('../output/outputPS7.txt', 'w')
         # Change the standard output to the file we created.
-        #sys.stdout = self.__outputFile
+        sys.stdout = self.__outputFile
        
 
     def run(self):
+        self.__promptsFile = open("../input/promptsPS7.txt", 'r')
+        self.__promptsText = self.__promptsFile.readlines()
+        showMinList = 0
+        searchLanguageOptions = []
+        
+        for line in self.__promptsText:
+            content = line.rstrip()
+            if content == "showMinList":
+                showMinList = content
+            
+            else:
+               parts = content.split(":")
+               if (len(parts) == 2 and parts[0] == "searchLanguage"):
+                   searchLanguageOptions.append(parts[1])
+    
+            
         self.readApplications("../input/inputPS7.txt")
         self.showAll()
-        if 'showMinList' in self.__promptsText:
+        if showMinList == "showMinList":
             self.displayHireList()
+            
+        #Get the candidates for the given language    
+        for lang in searchLanguageOptions:
+            self.displayCandidates(lang)
+        
+       
+                
+        
+        
+            
 
    
     def readApplications(self,inputFile):
@@ -55,18 +81,8 @@ class InterPretr:
                         dup_index = self.adjMatrix.getVertices().index(obj)
                         self.adjMatrix.addEdge(current_interpreter_index, dup_index)
 
-        for v1 in self.adjMatrix.getVertices():
-            print(v1.getName()+"-"+v1.getType())
-            print(v1.getCount())
-
-
-        # # calling methods 
-        # self.adjMatrix.addEdge(0, 1); 
-        # self.adjMatrix.addEdge(0, 2); 
-        # self.adjMatrix.addEdge(1, 2); 
-        # self.adjMatrix.addEdge(2, 3); 
-        # the adjacency matrix created 
-        self.adjMatrix.displayAdjacencyMatrix(); 
+         # the adjacency matrix created 
+        #self.adjMatrix.displayAdjacencyMatrix(); 
        
 
     def showAll(self):
@@ -95,13 +111,19 @@ class InterPretr:
             print(hiredCandidateDetails)
                     
                 
-            
-        
-
-
-    def displayCandidates(self, lang): 
+    def displayCandidates(self, lang):
         print("--------Function displayCandidates--------")
-        
+        #will print the interpreter who speaks given language
+        print("List of candidates who can speak "+lang+":")
+        lang = lang.strip() 
+        for v in self.adjMatrix.getVertices():
+            if(v.getName() == lang):
+                #get the column fo the language
+                lang_index = self.adjMatrix.getVertices().index(v)
+                #now get the interpreter where this lang is set to 1 in adjancy matrix
+                for i in range(len(self.adjMatrix.getGraph())):
+                    if((self.adjMatrix.getGraph())[i][lang_index] == 1):
+                        print((self.adjMatrix.getVertices())[i].getName())
 
 
     def findDirectTranslator(self, langA, langB):
@@ -144,17 +166,15 @@ class InterPretr:
             b = -1
             for i in range(V): 
                 for j in range(V): 
-                    if M[i][j] < minn: 
+                    if (M[i][j] !=0 and M[i][j] < minn): 
                         if self.__isValidEdge(i, j, inMST): 
                             minn = M[i][j] 
-                            print("M[i][j]: %d: (%d, %d) minn: %d" %
-                                  (M[i][j], i, j, minn))
+                            #print("M[i][j]: %d: (%d, %d) minn: %d" %
+                            #      (M[i][j], i, j, minn))
                             a = i 
                             b = j 
     
             if a != -1 and b != -1: 
-                print("Edge %d: (%d, %d) minn: %d" % 
-                    (edge_count, a, b, minn)) 
                 #On either of the vertex in the edge a,b if its an interpreter keep it in minCandidates list
                 #if(vertices[a].getType() == "interpreter"):
                 #    if(!(vertices[a] in minCandidates)):
@@ -172,9 +192,8 @@ class InterPretr:
                 inMST[b] = inMST[a] = True
                 # Check from the vertex on a,b and if any of them is a person store it in minCandidates
   
-        print(minCandidates)
         return minCandidates
-        #print("Minimum cost = %d" % mincost)    
+   
     
     
     # Returns true if edge u-v is a valid edge to be  
@@ -182,6 +201,8 @@ class InterPretr:
     # already included in MST and other is not in MST. 
     def __isValidEdge(self,u, v, inMST): 
         if u == v: 
+            return False
+        if(self.adjMatrix.getVertices()[u].getType == "interpreter" or self.adjMatrix.getVertices()[v].getType == "interpreter"):
             return False
         if inMST[u] == False and inMST[v] == False: 
             return False

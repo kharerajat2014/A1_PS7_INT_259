@@ -28,7 +28,7 @@ class Graph:
     __vertices = []
 
     # adjacency matrix 
-    __g =[[0 for x in range(10)] for y in range(10)] 
+    __g =[[0 for x in range(25)] for y in range(25)] 
         
     def getGraph(self):
         return self.__g

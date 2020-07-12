@@ -21,9 +21,9 @@ class InterPretr:
         
         # Initialize outputPS7.txt to get the output of all results
         #original_stdout = sys.stdout  # Save a reference to the original standard output
-        self.__outputFile =  open('../output/outputPS7.txt', 'w')
+        #self.__outputFile =  open('../output/outputPS7.txt', 'w')
         # Change the standard output to the file we created.
-        sys.stdout = self.__outputFile
+        #sys.stdout = self.__outputFile
        
 
     def run(self):
@@ -60,11 +60,11 @@ class InterPretr:
             print(v1.getCount())
 
 
-        # calling methods 
-        #self.adjMatrix.addEdge(0, 1); 
-        #self.adjMatrix.addEdge(0, 2); 
-        #self.adjMatrix.addEdge(1, 2); 
-        #self.adjMatrix.addEdge(2, 3); 
+        # # calling methods 
+        # self.adjMatrix.addEdge(0, 1); 
+        # self.adjMatrix.addEdge(0, 2); 
+        # self.adjMatrix.addEdge(1, 2); 
+        # self.adjMatrix.addEdge(2, 3); 
         # the adjacency matrix created 
         self.adjMatrix.displayAdjacencyMatrix(); 
        
@@ -77,9 +77,25 @@ class InterPretr:
     def displayHireList(self):
         print("--------Function displayHireList--------")
         g = self.adjMatrix.getGraph()
-        print(self.adjMatrix.getVerticesSize())
-        self.__getMinimumCandidates(g, self.adjMatrix.getVerticesSize())
+        verticesCount = self.adjMatrix.getVerticesSize()
+        vertices = self.adjMatrix.getVertices()
+        minCandidates = self.__getMinimumCandidates(g, verticesCount)
         # print the candidates and their languages.
+        print("No of candidates required to cover all languages:  %d" %
+              (len(minCandidates)))
+        for index in minCandidates:
+            candidate = self.adjMatrix.getVertices()[index]
+            #print(candidate.getName()+"-"+candidate.getType())
+            hiredCandidateDetails = candidate.getName()
+            for j in range(verticesCount):
+                if g[index][j] == 1:
+                    #This is the associated language
+                    hiredCandidateDetails += "/ " + vertices[j].getName()
+                    
+            print(hiredCandidateDetails)
+                    
+                
+            
         
 
 
@@ -131,6 +147,8 @@ class InterPretr:
                     if M[i][j] < minn: 
                         if self.__isValidEdge(i, j, inMST): 
                             minn = M[i][j] 
+                            print("M[i][j]: %d: (%d, %d) minn: %d" %
+                                  (M[i][j], i, j, minn))
                             a = i 
                             b = j 
     
@@ -142,24 +160,19 @@ class InterPretr:
                 #    if(!(vertices[a] in minCandidates)):
                 #        minCandidates.append(vertices[a])
                 if vertices[a].getType() == "interpreter":
-                    if vertices[a] not in minCandidates:
-                        name = vertices[a].getName()
-                        print(name)
-                        minCandidates.append(vertices[a])
+                    if a not in minCandidates:
+                        minCandidates.append(a)
                 
                 if vertices[b].getType() == "interpreter":
-                    if vertices[b] not in minCandidates:
-                        name = vertices[b].getName()
-                        print (name)
-                        minCandidates.append(vertices[b])
+                    if b not in minCandidates:
+                        minCandidates.append(b)
                         
-
                 edge_count += 1
                 mincost += minn 
                 inMST[b] = inMST[a] = True
                 # Check from the vertex on a,b and if any of them is a person store it in minCandidates
   
-        
+        print(minCandidates)
         return minCandidates
         #print("Minimum cost = %d" % mincost)    
     
